@@ -19,6 +19,11 @@ jobs:
         with:
           flutter-version: '3.x'
 
+      - name: Generate missing Android files
+        run: |
+          flutter create --platforms android --project-name super_ai_builder . 2>/dev/null || true
+          rm -f android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+
       - run: flutter pub get
 
       - run: flutter build apk --release
